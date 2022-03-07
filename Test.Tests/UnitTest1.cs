@@ -1,13 +1,38 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace Test.Tests
 {
-    [TestClass]
-    public class UnitTest1
+    public class ProductsTest : IClassFixture<InjectionFixture>
     {
-        [TestMethod]
-        public void TestMethod1()
+        private readonly InjectionFixture injection;
+        #region Property  
+
+        public ProductsTest(InjectionFixture injection)
         {
+            this.injection = injection;
         }
+
+        [Fact]
+        public async void TestName()
+        {
+            // Given
+        
+            // When
+        
+            // Then
+            var response = injection.client.GetAsync(new Uri("https://localhost:5001/products")).Result;
+
+                response.EnsureSuccessStatusCode();
+                await response.Content.ReadAsStringAsync().ContinueWith((Task<string> x) =>
+                {
+                    if (x.IsFaulted)
+                        throw x.Exception;
+
+                    Console.WriteLine(x.Result);
+                });
+        }
+        #endregion
     }
 }

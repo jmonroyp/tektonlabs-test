@@ -22,7 +22,7 @@ namespace Test.Api.Tracing
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             _stopwatch.Stop();
-            string msg = $"{DateTime.Now} - {context.HttpContext.Request.GetDisplayUrl()} - {_stopwatch.ElapsedMilliseconds}ms";
+            string msg = $"{DateTime.Now} - [{context.HttpContext.Request.Method}] {context.HttpContext.Request.GetDisplayUrl()} - {_stopwatch.ElapsedMilliseconds}ms";
             _logger.LogInformation(msg);
             File.AppendAllLines($"logs.log", new string[]{ msg } );
         }
