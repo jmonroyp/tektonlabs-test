@@ -5,11 +5,11 @@ using Newtonsoft.Json;
 
 namespace Test.Core.External
 {
-    public class HttpClientWrapper<T> where T : class
+    public static class HttpClientWrapper<T>
     {
         public static async Task<T> Get(string url)
         {
-            T result = null;
+            T result = default(T);
             using (var httpClient = new HttpClient())
             {
                 var response = httpClient.GetAsync(new Uri(url)).Result;
@@ -29,7 +29,7 @@ namespace Test.Core.External
 
         public static async Task<T> PostRequest(string apiUrl, T postObject)
         {
-            T result = null;
+            T result = default(T);;
 
             using (var client = new HttpClient())
             {

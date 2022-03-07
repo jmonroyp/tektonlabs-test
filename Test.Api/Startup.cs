@@ -16,9 +16,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Test.Api.BuilderExtensions;
 using Test.Api.Tracing;
+using Test.Core.Dtos;
 using Test.Core.Services;
 using Test.Core.Utils;
 using Test.Infraestructure.Database;
+using Test.Infraestructure.Entities;
 using Test.Infraestructure.Repositories;
 
 namespace Test.Api
@@ -43,6 +45,7 @@ namespace Test.Api
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(ProductsService));
+            services.AddScoped(typeof(ProductsProxyService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
